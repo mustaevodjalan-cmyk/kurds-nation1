@@ -56,7 +56,19 @@ export function useCitizenDashboard(ownerToken: string | null) {
     [ownerToken, dashboard, submitting],
   );
 
-  return { dashboard, answer, status, submitting, submit, reload: () => ownerToken && load(ownerToken) };
+  const applyBalance = useCallback((balance: number) => {
+    setDashboard((current) => (current ? { ...current, balance } : current));
+  }, []);
+
+  return {
+    dashboard,
+    answer,
+    status,
+    submitting,
+    submit,
+    applyBalance,
+    reload: () => ownerToken && load(ownerToken),
+  };
 }
 
 export type CitizenDashboardState = ReturnType<typeof useCitizenDashboard>;

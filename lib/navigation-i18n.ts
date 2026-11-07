@@ -6,6 +6,7 @@ export type NavigationStrings = {
   registry: string;
   syndicate: string;
   justice: string;
+  media: string;
   wipeLabel: string;
   wipeHint: string;
 };
@@ -17,6 +18,7 @@ export const NAVIGATION_I18N: Record<Lang, NavigationStrings> = {
     registry: "Tomar",
     syndicate: "Hevkarî",
     justice: "Dîwan",
+    media: "Medya",
     wipeLabel: "NN_WIPE",
     wipeHint: "Hemû peyam, pasport û daneyên li ser vê cîhazê jê dibin",
   },
@@ -26,6 +28,7 @@ export const NAVIGATION_I18N: Record<Lang, NavigationStrings> = {
     registry: "تۆمارگا",
     syndicate: "هەڤکاری",
     justice: "دیوان",
+    media: "میدیا",
     wipeLabel: "NN_WIPE",
     wipeHint: "هەموو نامە، پاسپۆرت و زانیارییەکانی ئەم ئامێرە دەسڕێنەوە",
   },
@@ -35,6 +38,7 @@ export const NAVIGATION_I18N: Record<Lang, NavigationStrings> = {
     registry: "Реестр",
     syndicate: "Hevkarî",
     justice: "Правосудие",
+    media: "Медиа",
     wipeLabel: "NN_WIPE",
     wipeHint: "Удалит все сообщения, паспорт и данные на этом устройстве",
   },
@@ -44,6 +48,7 @@ export const NAVIGATION_I18N: Record<Lang, NavigationStrings> = {
     registry: "Registry",
     syndicate: "Syndicate",
     justice: "Justice",
+    media: "Media",
     wipeLabel: "NN_WIPE",
     wipeHint: "Erases all messages, your passport and local data on this device",
   },

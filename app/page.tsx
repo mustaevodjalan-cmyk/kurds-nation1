@@ -10,21 +10,21 @@ import { useCitizenDashboard } from "@/hooks/use-citizen-dashboard";
 import { useRegistry } from "@/hooks/use-registry";
 import { useSyndicate } from "@/hooks/use-syndicate";
 import { useJustice } from "@/hooks/use-justice";
-import { useRadio } from "@/hooks/use-radio";
+import { useMedia } from "@/hooks/use-media";
 import { DASHBOARD_I18N } from "@/lib/dashboard-i18n";
 import { JUSTICE_I18N } from "@/lib/justice-i18n";
+import { MEDIA_I18N } from "@/lib/media-i18n";
 import { MESSENGER_I18N } from "@/lib/messenger-i18n";
 import { NAVIGATION_I18N } from "@/lib/navigation-i18n";
-import { RADIO_I18N } from "@/lib/radio-i18n";
 import { REGISTRY_I18N } from "@/lib/registry-i18n";
 import { SYNDICATE_I18N } from "@/lib/syndicate-i18n";
 import { cn } from "@/lib/utils";
 import { HomeView } from "@/components/network/home-view";
 import { JusticeView } from "@/components/network/justice/justice-view";
 import { LanguageSwitcher } from "@/components/network/language-switcher";
+import { MediaView } from "@/components/network/media/media-view";
 import { MessengerView } from "@/components/network/messenger/messenger-view";
 import { NetworkStatus } from "@/components/network/network-status";
-import { RadioPlayer } from "@/components/network/radio/radio-player";
 import { RegistryView } from "@/components/network/registry/registry-view";
 import { SunMark } from "@/components/network/sun-mark";
 import { SyndicateView } from "@/components/network/syndicate/syndicate-view";
@@ -42,7 +42,7 @@ export default function Home() {
   const registry = useRegistry();
   const syndicate = useSyndicate(passport.ownerToken);
   const justice = useJustice(passport.ownerToken);
-  const radio = useRadio();
+  const media = useMedia(passport.ownerToken);
   const [wiping, setWiping] = useState(false);
   const m = MESSENGER_I18N[lang];
   const r = REGISTRY_I18N[lang];
@@ -50,7 +50,7 @@ export default function Home() {
   const nav = NAVIGATION_I18N[lang];
   const sy = SYNDICATE_I18N[lang];
   const j = JUSTICE_I18N[lang];
-  const ra = RADIO_I18N[lang];
+  const me = MEDIA_I18N[lang];
 
   const handleWipe = async () => {
     if (wiping) return;
@@ -107,6 +107,9 @@ export default function Home() {
             <TabsTrigger value="syndicate" className={cn(TAB_TRIGGER, "data-[state=active]:bg-sun")}>
               {nav.syndicate}
             </TabsTrigger>
+            <TabsTrigger value="media" className={cn(TAB_TRIGGER, "data-[state=active]:bg-flame")}>
+              {nav.media}
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="passport" className="mt-0">
@@ -134,21 +137,19 @@ export default function Home() {
               syndicate={syndicate}
             />
           </TabsContent>
+          <TabsContent value="media" className="mt-0 pb-10">
+            <MediaView
+              strings={me}
+              ownerToken={passport.ownerToken}
+              media={media}
+              balance={citizen.dashboard?.balance ?? null}
+              onBalanceChange={citizen.applyBalance}
+            />
+          </TabsContent>
         </Tabs>
       </main>
 
       <NetworkStatus t={t} />
-      <div aria-hidden="true" className="h-40" />
-      <RadioPlayer
-        strings={ra}
-        stationId={radio.stationId}
-        playing={radio.playing}
-        volume={radio.volume}
-        unsupported={radio.unsupported}
-        onToggle={radio.toggle}
-        onSelectStation={radio.selectStation}
-        onVolumeChange={radio.setVolume}
-      />
     </>
   );
 }
